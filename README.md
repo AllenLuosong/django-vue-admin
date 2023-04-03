@@ -31,7 +31,7 @@
 
 👩‍👧‍👦演示地址：[http://demo.django-vue-admin.com](http://demo.django-vue-admin.com) 
 
-- 账号：superadmin 
+- 账号： superadmin 
 
 - 密码：admin123456
 
@@ -106,6 +106,11 @@ npm run dev
 # .env.development 文件中可配置启动端口等参数
 # 构建生产环境
 # npm run build
+
+# 解决ERR_OSSL_EVP_UNSUPPORTED的报错
+# windows端 命令行输入 set NODE_OPTIONS=--openssl-legacy-provider
+# linux端 export NODE_OPTIONS=--openssl-legacy-provider
+
 ```
 
 
@@ -121,14 +126,14 @@ npm run dev
 4. 安装依赖环境
 	pip3 install -r requirements.txt
 5. 执行迁移命令：
-	python3 manage.py makemigrations
-	python3 manage.py migrate
+	python manage.py makemigrations
+	python manage.py migrate
 6. 初始化数据
-	python3 manage.py init
+	python manage.py init
 7. 初始化省市县数据:
-	python3 manage.py init_area
+	python manage.py init_area
 8. 启动项目
-	python3 manage.py runserver 0.0.0.0:8000
+	python manage.py runserver 0.0.0.0:8000
 或使用 daphne :
   daphne -b 0.0.0.0 -p 8000 application.asgi:application
 ~~~
@@ -158,7 +163,7 @@ exit
 前端地址：http://127.0.0.1:8080
 后端地址：http://127.0.0.1:8080/api
 # 在服务器上请把127.0.0.1 换成自己公网ip
-账号：superadmin 密码：admin123456
+账号： superadmin 密码： admin123456
 
 # docker-compose 停止
 docker-compose down

@@ -1,6 +1,6 @@
 {
   "name": "django-vue-admin",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "scripts": {
     "serve": "vue-cli-service serve --open",
     "start": "npm run serve",
@@ -18,11 +18,12 @@
     "axios-mock-adapter": "^1.18.1",
     "better-scroll": "^1.15.2",
     "china-division": "^2.4.0",
+    "codemirror": "^6.0.1",
     "core-js": "^3.4.3",
     "cropperjs": "^1.5.6",
-    "d2-crud-plus": "^2.13.1",
-    "d2-crud-x": "^2.13.1",
-    "d2p-extends": "^2.13.1",
+    "d2-crud-plus": "^2.17.9",
+    "d2-crud-x": "^2.17.9",
+    "d2p-extends": "^2.17.9",
     "dayjs": "^1.8.17",
     "echarts": "^5.1.2",
     "el-phone-number-input": "^1.1.5",
@@ -42,13 +43,16 @@
     "sortablejs": "^1.10.1",
     "ua-parser-js": "^0.7.20",
     "vue": "2.7.14",
+    "vue-codemirror": "^4.0.6",
+    "vue-grid-layout": "^2.4.0",
     "vue-i18n": "^8.15.1",
     "vue-infinite-scroll": "^2.0.2",
     "vue-router": "^3.6.5",
     "vue-splitpane": "^1.0.6",
     "vuex": "^3.1.2",
     "vxe-table": "^3.3.2",
-    "xe-utils": "^3.2.1"
+    "xe-utils": "^3.2.1",
+    "yaml": "^2.2.1"
   },
   "devDependencies": {
     "@d2-projects/vue-filename-injector": "^1.1.0",

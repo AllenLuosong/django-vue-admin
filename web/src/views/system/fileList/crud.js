@@ -15,13 +15,7 @@ export const crudOptions = (vm) => {
           return !vm.hasPermissions('Retrieve')
         }
       },
-      edit: {
-        thin: true,
-        text: '',
-        disabled () {
-          return !vm.hasPermissions('Update')
-        }
-      },
+      edit: false,
       remove: {
         thin: true,
         text: '',
@@ -88,7 +82,7 @@ export const crudOptions = (vm) => {
         key: 'url',
         type: 'file-uploader',
         search: {
-          disabled: true
+          disabled: false
         },
         width: 220
       },

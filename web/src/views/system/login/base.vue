@@ -46,13 +46,13 @@ export default {
       selectUsersDialogVisible: false,
       users: [
         {
-          name: '超管',
-          username: 'superadmin',
+          name: '管理员',
+          username: 'admin',
           password: 'admin123456'
         },
         {
-          name: '管理员',
-          username: 'admin',
+          name: '测试账号',
+          username: 'test0403',
           password: 'admin123456'
         }
       ]

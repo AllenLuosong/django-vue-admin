@@ -1,19 +1,20 @@
-# -*- coding: utf-8 -*-
+#!usr/bin/env python3
+# -*- encoding: utf-8 -*-
+'''
+Filename         : permission.py
+Description      : 
+Time             : 2023/04/03 09:27:01
+Author           : AllenLuo
+Version          : 1.0
+'''
 
-"""
-@author: 猿小天
-@contact: QQ:1638245306
-@Created on: 2021/6/6 006 10:30
-@Remark: 自定义权限
-"""
+
 import re
-
 from django.contrib.auth.models import AnonymousUser
 from django.db.models import F
 from rest_framework.permissions import BasePermission
-
 from dvadmin.system.models import ApiWhiteList
-
+from loguru import logger
 
 def ValidationApi(reqApi, validApi):
     """
@@ -24,7 +25,7 @@ def ValidationApi(reqApi, validApi):
     """
     if validApi is not None:
         valid_api = validApi.replace('{id}', '.*?')
-        matchObj = re.match(valid_api, reqApi, re.M | re.I)
+        matchObj = re.match(valid_api, reqApi, re.M | re.I)  
         if matchObj:
             return True
         else:

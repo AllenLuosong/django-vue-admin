@@ -1,11 +1,14 @@
-# -*- coding: utf-8 -*-
+#!usr/bin/env python3
+# -*- encoding: utf-8 -*-
+'''
+Filename         : serializers.py
+Description      : 
+Time             : 2023/04/02 15:44:59
+Author           : AllenLuo
+Version          : 1.0
+'''
 
-"""
-@author: 猿小天
-@contact: QQ:1638245306
-@Created on: 2021/6/1 001 22:47
-@Remark: 自定义序列化器
-"""
+
 from rest_framework import serializers
 from rest_framework.fields import empty
 from rest_framework.request import Request
@@ -15,7 +18,7 @@ from rest_framework.utils.serializer_helpers import BindingDict
 
 from dvadmin.system.models import Users
 from django_restql.mixins import DynamicFieldsMixin
-
+from loguru import logger
 
 class CustomModelSerializer(DynamicFieldsMixin, ModelSerializer):
     """
@@ -26,7 +29,6 @@ class CustomModelSerializer(DynamicFieldsMixin, ModelSerializer):
     # 修改人的审计字段名称, 默认modifier, 继承使用时可自定义覆盖
     modifier_field_id = "modifier"
     modifier_name = serializers.SerializerMethodField(read_only=True)
-
     def get_modifier_name(self, instance):
         if not hasattr(instance, "modifier"):
             return None
@@ -103,6 +105,24 @@ class CustomModelSerializer(DynamicFieldsMixin, ModelSerializer):
         if getattr(self.request, "user", None):
             return getattr(self.request.user, "id", None)
         return None
+
+    @property
+    def errors(self):
+        # get errors
+        errors = super().errors
+        verbose_errors = {}
+
+        # fields = { field.name: field.verbose_name } for each field in model
+        fields = {field.name: field.verbose_name for field in
+                  self.Meta.model._meta.get_fields() if hasattr(field, 'verbose_name')}
+
+        # iterate over errors and replace error key with verbose name if exists
+        for field_name, error in errors.items():
+            if field_name in fields:
+                verbose_errors[str(fields[field_name])] = error
+            else:
+                verbose_errors[field_name] = error
+        return verbose_errors
 
     # @cached_property
     # def fields(self):

@@ -54,6 +54,11 @@ export default {
           name: '测试账号',
           username: 'test0403',
           password: 'admin123456'
+        },
+        {
+          name: '超管',
+          username: 'superadmin',
+          password: 'admin123456'
         }
       ]
     }

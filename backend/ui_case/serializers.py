@@ -16,6 +16,7 @@ import os
 import yaml
 from rest_framework import serializers
 from loguru import logger
+from rest_framework.decorators import action
 
 class UITestDetailSerializer(CustomModelSerializer):
     """
@@ -35,12 +36,13 @@ class UITestDetailSerializer(CustomModelSerializer):
         data['ui_case_content'] = ui_case_content
         return data
 
-class UITestDetailCreateUpdateSerializer(CustomModelSerializer):
+class UITestUpdateSerializer(CustomModelSerializer):
     """
     创建/更新时的列化器
     """
     def validate(self, data):
         yamlFileData = self.request.data['yamlFile']
+        yaml.safe_load(yamlFileData) # 校验前端文件是否有格式问题
         ui_case_path = os.path.join(BASE_DIR, "static", "autotest5", "test_demo2_case22.yaml")
         with open(ui_case_path, "w+", encoding="utf-8", newline='') as f: # newline参数表示默认不做换行处理
             f.write(yamlFileData)

@@ -14,7 +14,6 @@ from ui_case.views import UITestModelViewSet
 
 router = SimpleRouter()
 router.register("", UITestModelViewSet)
-
 urlpatterns = [
 ]
 urlpatterns += router.urls

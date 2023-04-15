@@ -1,18 +1,21 @@
-# -*- coding: utf-8 -*-
+#!usr/bin/env python3
+# -*- encoding: utf-8 -*-
+'''
+Filename         : exception.py
+Description      : 
+Time             : 2023/04/15 15:48:10
+Author           : AllenLuo
+Version          : 1.0
+'''
 
-"""
-@author: 猿小天
-@contact: QQ:1638245306
-@Created on: 2021/6/2 002 16:06
-@Remark: 自定义异常处理
-"""
 import logging
 import traceback
-
+import yaml
 from django.db.models import ProtectedError
 from django.http import Http404
 from rest_framework.exceptions import APIException as DRFAPIException, AuthenticationFailed
 from rest_framework.views import set_rollback
+from django.db import DatabaseError
 
 from dvadmin.utils.json_response import ErrorResponse
 
@@ -32,12 +35,13 @@ def CustomExceptionHandler(ex, context):
     code = 4000
 
     if isinstance(ex, AuthenticationFailed):
-        code = 401
+        code = 4001
         msg = ex.detail
     elif isinstance(ex,Http404):
-        code = 400
+        code = 40000
         msg = "接口地址不正确"
     elif isinstance(ex, DRFAPIException):
+        code = 4002
         set_rollback()
         msg = ex.detail
         if isinstance(msg,dict):
@@ -47,9 +51,13 @@ def CustomExceptionHandler(ex, context):
     elif isinstance(ex, ProtectedError):
         set_rollback()
         msg = "删除失败:该条数据与其他数据有相关绑定"
-    # elif isinstance(ex, DatabaseError):
-    #     set_rollback()
-    #     msg = "接口服务器异常,请联系管理员"
+    elif isinstance(ex, DatabaseError):
+        code = 5000
+        set_rollback()
+        msg = "接口服务器异常,请联系管理员"
+    elif isinstance(ex, yaml.YAMLError):
+        code = 4003
+        msg = '用例文件格式错误,请检查后提交'
     elif isinstance(ex, Exception):
         logger.error(traceback.format_exc())
         msg = str(ex)

@@ -9,9 +9,8 @@ Version          : 1.0
 '''
 
 from ui_case.models import UI_test_detail
-from ui_case.serializers import UITestDetailCreateUpdateSerializer, UITestDetailSerializer
+from ui_case.serializers import UITestUpdateSerializer, UITestDetailSerializer
 from dvadmin.utils.viewset import CustomModelViewSet
-from loguru import logger
 
 class UITestModelViewSet(CustomModelViewSet):
     """
@@ -24,5 +23,4 @@ class UITestModelViewSet(CustomModelViewSet):
     
     queryset = UI_test_detail.objects.all()
     serializer_class = UITestDetailSerializer
-    create_serializer_class = UITestDetailCreateUpdateSerializer
-    update_serializer_class = UITestDetailCreateUpdateSerializer
+    update_serializer_class = UITestUpdateSerializer

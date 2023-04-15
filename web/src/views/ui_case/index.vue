@@ -1,17 +1,16 @@
 <template>
   <d2-container>
-    <template slot="header">UI Case
-      <el-button-group>
-          <el-button size="small" type="primary" @click="updateRequest"
-            ><i class="el-icon-edit" /> 更新</el-button
-          >
-        </el-button-group>
+    <template slot="header">请选择用例文件
+      <el-select v-model="selectedFile" placeholder="选择文件" @change="loadFile">
+      <el-option v-for="file in files" :key="file" :label="file" :value="file"></el-option>
+    </el-select>
+    <el-button class="d2-ml-5" type="primary" round @click="updateFile">
+      更新用例文件
+    </el-button>
     </template>
-  <div>
     <div class="editor-container">
-      <yaml-editor  v-model="yamlData" />
+      <yaml-editor  v-model="yamlData"/>
     </div>
-  </div>
 </d2-container>
 </template>
 
@@ -19,35 +18,47 @@
 import YamlEditor from '@/components/YamlEditor/index.vue'
 import axios from 'axios'
 import { UpdateObj } from './api'
+import { Message } from 'element-ui'
+
 export default {
-  name: 'YamlEditorDemo',
+  name: 'Uicase',
   components: { YamlEditor },
-  axiosConfig: {
-    headers: {
-      'Content-Type': 'application/x-yaml'
-    }
-  },
   data () {
     return {
+      selectedFile: 'test_demo2_case.yaml',
+      files: ['test_demo2_case.yaml', 'test_demo3_case.yaml', 'test_demo4_case.yaml'],
       yamlData: ''
     }
   },
   mounted () {
-    this.getData()
+    this.loadFile()
   },
   methods: {
-    getData () {
-      axios.get('/test_demo2_case.yaml').then(response => {
+    loadFile () {
+      axios.get(`/${this.selectedFile}`).then(response => {
         this.yamlData = response.data
       }).catch((error) => {
         console.error('Error get YAML file:', error)
       })
     },
-    updateRequest (obj) {
+    updateFile () {
       const formData = new FormData()
       formData.append('yamlFile', this.yamlData)
       UpdateObj(formData).then(response => {
-        console.log('UI用例更新状态:', response.msg)
+        const retcode = response.code
+        if (retcode === 2000) {
+          Message({
+            message: response.msg,
+            type: 'success',
+            duration: 3 * 1000
+          })
+        } else {
+          Message({
+            message: response.msg,
+            type: 'error',
+            duration: 3 * 1000
+          })
+        }
       })
     }
   }

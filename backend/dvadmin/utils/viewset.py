@@ -96,8 +96,6 @@ class CustomModelViewSet(ModelViewSet,ImportSerializerMixin,ExportSerializerMixi
         serializer = self.get_serializer(instance, data=request.data, request=request, partial=partial)
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
-        logger.info(f'请求的数据-{request.data}')
-
         if getattr(instance, '_prefetched_objects_cache', None):
             # If 'prefetch_related' has been applied to a queryset, we need to
             # forcibly invalidate the prefetch cache on the instance.

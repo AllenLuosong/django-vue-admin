@@ -4,7 +4,8 @@
 
 [预 览](https://demo.django-vue-admin.com) | [官网文档](https://www.django-vue-admin.com) | [群聊](https://qm.qq.com/cgi-bin/qm/qr?k=fOdnHhC8DJlRHGYSnyhoB8P5rgogA6Vs&jump_from=webapi) | [社区](https://bbs.django-vue-admin.com) | [插件市场](https://bbs.django-vue-admin.com/plugMarket.html) | [Github](https://github.com/liqianglog/django-vue-admin) 
 
-
+💡 ****「特别说明」****
+本项目基于https://github.com/liqianglog/django-vue-admin二次开发,整合常用功能
 
 💡 **「关于」**
 

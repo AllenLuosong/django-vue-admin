@@ -35,7 +35,6 @@ def CustomExceptionHandler(ex, context):
     code = 4000
 
     if isinstance(ex, AuthenticationFailed):
-        code = 4001
         msg = ex.detail
     elif isinstance(ex,Http404):
         code = 40000

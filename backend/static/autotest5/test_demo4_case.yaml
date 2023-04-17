@@ -1,0 +1,10 @@
+testdemo2B:
+  descrption: "验证bing搜索功能正常"
+  test_step: { "open": "https://cn.bing.com/",
+               "fill1": {"selector": "#sb_form_q", "value": "test_account20221212"},
+               "click1": "#search_icon > svg"
+              }              
+  expect_result: {  "descrption": "期望结果页面的tab标签'网页'两个字",
+                    "selector": "id=b-scopeListItem-web",
+                    "value": "网页"
+                  }

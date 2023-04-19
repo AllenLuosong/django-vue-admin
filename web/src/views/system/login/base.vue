@@ -19,8 +19,8 @@ export default {
       backgroundImage: 'url(' + this.loginBackground + ')',
       // 表单
       formLogin: {
-        username: '',
-        password: '',
+        username: 'test0403',
+        password: 'admin123456',
         captcha: ''
       },
       // 表单校验

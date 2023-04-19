@@ -1,17 +1,17 @@
 export const crudOptions = vm => {
   return {
-    pageOptions: {
-      compact: true
-    },
     options: {
-      tableType: 'vxe-table',
-      rowKey: true, // 必须设置，true or false
-      rowId: 'id',
       height: '100%', // 表格高度100%, 使用toolbar必须设置
-      highlightCurrentRow: false
+      rowKey: 'id'
+    },
+    viewOptions: {
+      componentType: 'row'
+    },
+    pageOptions: {
+      compact: true // 是否紧凑型页面
     },
     rowHandle: {
-      width: 140,
+      width: 200,
       view: {
         thin: true,
         text: '',
@@ -32,27 +32,29 @@ export const crudOptions = vm => {
         disabled () {
           return !vm.hasPermissions('Delete')
         }
-      }
+      },
+      fixed: 'right' // 右边固定列
     },
     indexRow: {
       // 或者直接传true,不显示title，不居中
       title: '序号',
       align: 'center',
+      fixed: 'left',
       width: 100
     },
-    viewOptions: {
-      componentType: 'form'
-    },
     formOptions: {
-      defaultSpan: 24, // 默认的表单 span
-      width: '35%'
+      defaultSpan: 20, // 默认的表单 span
+      maxHeight: true,
+      labelWidth: '30%',
+      width: '50%'
     },
     columns: [{
       title: 'ID',
       key: 'id',
       show: false,
       disabled: true,
-      width: 90,
+      width: 120,
+      fixed: 'left',
       form: {
         disabled: true
       }
@@ -63,8 +65,9 @@ export const crudOptions = vm => {
       sortable: true,
       treeNode: true,
       type: 'input',
+      fixed: 'left',
       form: {
-        editDisabled: true,
+        editDisabled: false,
         rules: [
           // 表单校验规则
           { required: true, message: 'CaseNo必填' }
@@ -93,7 +96,7 @@ export const crudOptions = vm => {
       },
       type: 'input',
       form: {
-        editDisabled: true,
+        editDisabled: false,
         rules: [
           // 表单校验规则
           { required: true, message: 'Summary必填' }
@@ -115,7 +118,7 @@ export const crudOptions = vm => {
       sortable: true,
       type: 'input',
       form: {
-        editDisabled: true,
+        editDisabled: false,
         rules: [
           // 表单校验规则
           { required: true, message: 'Domain必填' }
@@ -137,7 +140,7 @@ export const crudOptions = vm => {
       sortable: true,
       type: 'input',
       form: {
-        editDisabled: true,
+        editDisabled: false,
         rules: [
           // 表单校验规则
           { required: true, message: 'InterfacePath必填' }
@@ -157,9 +160,12 @@ export const crudOptions = vm => {
       title: 'IsExecute',
       key: 'IsExecute',
       sortable: true,
-      type: 'input',
+      type: 'select',
+      dict: {
+        data: [{ label: 'Y', value: 'Y' }, { label: 'N', value: 'N' }]
+      },
       form: {
-        editDisabled: true,
+        editDisabled: false,
         rules: [
           // 表单校验规则
           { required: true, message: 'IsExecute必填' }
@@ -168,7 +174,7 @@ export const crudOptions = vm => {
           props: {
             clearable: true
           },
-          placeholder: '请输入IsExecute'
+          placeholder: '请选择IsExecute'
         },
         itemProps: {
           class: { yxtInput: true }
